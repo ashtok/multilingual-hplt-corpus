@@ -38,29 +38,38 @@ uv run python main.py --skip stats
 Edit `configs/corpus.yaml` to choose your languages and scale:
 
 ```yaml
-source: "https://data.hplt-project.org/three/sorted"
-total_lines: 10_000_000
-min_wds_score: 0.5        # HPLT quality score threshold (0–1)
-download_buffer: 1.25     # download 25% extra to account for filtering loss
+source: https://data.hplt-project.org/three/sorted
+total_lines: 10000000
+min_wds_score: 0.5
+download_buffer: 1.25
 
 languages:
-  hin_Deva: { fraction: 0.10, bcp47: hi }   # HPLT lang code: BCP-47 tag
-  eng_Latn: { fraction: 0.09, bcp47: en }
-  # add any language from HPLT v3 here
+  hin_Deva:
+    bcp47: hi
+    fraction: 0.1
+  ben_Beng:
+    bcp47: bn
+    fraction: 0.09
+  tam_Taml:
+    bcp47: ta
+    fraction: 0.09
+  # ... add/remove any language from HPLT v3
 
 quality:
   min_chars: 50
-  max_chars: 100_000
+  max_chars: 100000
   min_avg_word_len: 2.0
-  max_non_alpha_ratio: 0.50
+  max_non_alpha_ratio: 0.5
 
 dedup:
+  exact: true
+  minhash: true
   minhash_threshold: 0.7
   num_perm: 128
   ngram: 5
 ```
 
-**Fractions don't need to sum to 1** — the pipeline normalises them automatically. To find available language codes, browse `https://data.hplt-project.org/three/sorted/`.
+**Fractions don't need to sum to 1** — the pipeline normalises them. To find available language codes, browse `https://data.hplt-project.org/three/sorted/`.
 
 ---
 
