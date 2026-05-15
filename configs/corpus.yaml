@@ -6,39 +6,69 @@ dedup:
   num_perm: 128
 download_buffer: 1.25
 languages:
-  ben_Beng:
-    bcp47: bn
-    fraction: 0.09
-  eng_Latn:
-    bcp47: en
-    fraction: 0.09
-  guj_Gujr:
-    bcp47: gu
-    fraction: 0.09
+  # ── Major Indic languages ────────────────────────────────────────────────────
   hin_Deva:
     bcp47: hi
-    fraction: 0.1
-  kan_Knda:
-    bcp47: kn
-    fraction: 0.09
-  mal_Mlym:
-    bcp47: ml
-    fraction: 0.09
-  mar_Deva:
-    bcp47: mr
-    fraction: 0.09
-  pan_Guru:
-    bcp47: pa
-    fraction: 0.09
+    fraction: 0.08
+  ben_Beng:
+    bcp47: bn
+    fraction: 0.06
   tam_Taml:
     bcp47: ta
-    fraction: 0.09
+    fraction: 0.06
   tel_Telu:
     bcp47: te
-    fraction: 0.09
+    fraction: 0.06
+  mar_Deva:
+    bcp47: mr
+    fraction: 0.06
   urd_Arab:
     bcp47: ur
-    fraction: 0.09
+    fraction: 0.06
+  guj_Gujr:
+    bcp47: gu
+    fraction: 0.055
+  kan_Knda:
+    bcp47: kn
+    fraction: 0.055
+  mal_Mlym:
+    bcp47: ml
+    fraction: 0.055
+  pan_Guru:
+    bcp47: pa
+    fraction: 0.055
+  ory_Orya:
+    bcp47: or
+    fraction: 0.05
+  # ── Regional / smaller Indic languages ──────────────────────────────────────
+  asm_Beng:
+    bcp47: as
+    fraction: 0.04
+  mai_Deva:
+    bcp47: mai
+    fraction: 0.04
+  bho_Deva:
+    bcp47: bho
+    fraction: 0.04
+  hne_Deva:
+    bcp47: hne
+    fraction: 0.035
+  npi_Deva:
+    bcp47: ne
+    fraction: 0.035
+  mni_Beng:
+    bcp47: mni
+    fraction: 0.03
+  san_Deva:
+    bcp47: sa
+    fraction: 0.03
+  sat_Olck:
+    bcp47: sat
+    fraction: 0.025
+  # ── English ─────────────────────────────────────────────────────────────────
+  eng_Latn:
+    bcp47: en
+    fraction: 0.055
 min_wds_score: 0.5
 quality:
   max_chars: 100000
@@ -46,4 +76,4 @@ quality:
   min_avg_word_len: 2.0
   min_chars: 50
 source: https://data.hplt-project.org/three/sorted
-total_lines: 10000000
+total_lines: 50000000
