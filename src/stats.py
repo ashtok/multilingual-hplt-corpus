@@ -7,12 +7,14 @@ MERGED_PATH = Path("data/merged/train.jsonl")
 STATS_OUT   = Path("data/stats.json")
 
 
-def bucket_score(score: float) -> str:
-    if score >= 0.9: return "0.9–1.0"
-    if score >= 0.8: return "0.8–0.9"
-    if score >= 0.7: return "0.7–0.8"
-    if score >= 0.6: return "0.6–0.7"
-    return                   "0.5–0.6"
+def bucket_score(score) -> str:
+    if score is None: return "unknown"
+    score = float(score)
+    if score >= 10: return "10+"
+    if score >= 8:  return "8–10"
+    if score >= 6:  return "6–8"
+    if score >= 4:  return "4–6"
+    return                  "<4"
 
 
 def flatten_field(val, default="unknown") -> str:
@@ -96,9 +98,9 @@ def main():
     print(f"  {'─'*60}")
     print(f"  {'TOTAL':<8} {total:>10,} {'100.0':>6}% {est_tokens:>14,}")
 
-    print(f"\n  QUALITY SCORE DISTRIBUTION")
+    print(f"\n  QUALITY SCORE DISTRIBUTION (raw WDS, higher = better)")
     print(f"  {'─'*40}")
-    for bucket in ["0.9–1.0", "0.8–0.9", "0.7–0.8", "0.6–0.7", "0.5–0.6"]:
+    for bucket in ["10+", "8–10", "6–8", "4–6", "<4"]:
         n   = score_buckets.get(bucket, 0)
         pct = 100 * n / total if total else 0
         bar = "█" * int(pct / 2)
@@ -133,7 +135,7 @@ def main():
             }
             for lang in sorted(lang_docs, key=lambda x: -lang_docs[x])
         },
-        "quality_score_distribution": dict(score_buckets),
+        "quality_score_distribution_raw_wds": dict(score_buckets),
         "top_collections":            dict(collections_ctr.most_common(10)),
         "web_registers":              dict(web_registers.most_common(10)),
     }

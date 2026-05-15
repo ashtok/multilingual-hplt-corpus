@@ -35,23 +35,26 @@ CLEAN_TARGETS, RAW_TARGETS = per_language_targets(CFG)
 
 
 def get_quality_score(obj: dict) -> float:
-    """Handle all HPLT v3 doc_scores formats: dict, list, float, None."""
+    """Return HPLT v3 WDS score from the 's' field (raw integer, higher = better).
+    Falls back to doc_scores[0] if 's' is absent. Returns None if unavailable."""
+    s = obj.get("s")
+    if s is not None:
+        try:
+            return float(s)
+        except (TypeError, ValueError):
+            pass
     ds = obj.get("doc_scores")
-    if ds is None:
-        return 1.0
-    if isinstance(ds, dict):
-        return float(ds.get("wds", ds.get("avg", 1.0)))
-    if isinstance(ds, list):
-        if not ds:
-            return 1.0
-        first = ds[0]
-        if isinstance(first, dict):
-            return float(first.get("wds", first.get("avg", 1.0)))
-        return float(first)
+    if not ds:
+        return None
+    first = ds[0]
+    if isinstance(first, dict):
+        v = first.get("wds", first.get("avg", next(iter(first.values()), None)))
+    else:
+        v = first
     try:
-        return float(ds)
+        return float(v) if v is not None else None
     except (TypeError, ValueError):
-        return 1.0
+        return None
 
 
 def fetch_map(lang: str) -> list[str]:
@@ -72,8 +75,6 @@ def stream_shard(url: str):
 
 
 def download():
-    min_score = CFG.get("min_wds_score", 0.0)
-
     for lang in tqdm(CFG["languages"], desc="Languages"):
         raw_target   = RAW_TARGETS[lang]
         clean_target = CLEAN_TARGETS[lang]
@@ -102,10 +103,9 @@ def download():
                             obj = json.loads(line)
                         except json.JSONDecodeError:
                             continue
-                        if get_quality_score(obj) >= min_score:
-                            f.write(line + "\n")
-                            collected += 1
-                            bar.update(1)
+                        f.write(line + "\n")
+                        collected += 1
+                        bar.update(1)
                         if collected >= raw_target:
                             break
                 except Exception as e:

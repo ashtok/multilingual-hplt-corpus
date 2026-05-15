@@ -11,26 +11,31 @@ MERGED_DIR = Path("data/merged")
 MERGED_DIR.mkdir(parents=True, exist_ok=True)
 TOTAL      = CFG["total_lines"]
 
-DROP_KEYS  = {"f", "o", "rs", "de", "xml", "html_lang", "ts", "cluster_size"}
+DROP_KEYS  = {"f", "o", "rs", "de", "xml", "html_lang", "ts", "cluster_size",
+              "s", "doc_scores", "filter", "pii", "seg_langs", "crawl_id", "id"}
 
 
 def get_quality_score(obj: dict) -> float:
+    """Return HPLT v3 WDS score from the 's' field (raw integer, higher = better).
+    Falls back to doc_scores[0] if 's' is absent. Returns None if unavailable."""
+    s = obj.get("s")
+    if s is not None:
+        try:
+            return float(s)
+        except (TypeError, ValueError):
+            pass
     ds = obj.get("doc_scores")
-    if ds is None:
-        return 0.0
-    if isinstance(ds, dict):
-        return float(ds.get("wds", ds.get("avg", next(iter(ds.values()), 0.0))))
-    if isinstance(ds, list):
-        if not ds:
-            return 0.0
-        first = ds[0]
-        if isinstance(first, dict):
-            return float(first.get("wds", first.get("avg", next(iter(first.values()), 0.0))))
-        return float(first)
+    if not ds:
+        return None
+    first = ds[0]
+    if isinstance(first, dict):
+        v = first.get("wds", first.get("avg", next(iter(first.values()), None)))
+    else:
+        v = first
     try:
-        return float(ds)
+        return float(v) if v is not None else None
     except (TypeError, ValueError):
-        return 0.0
+        return None
 
 
 def count_available(langs):
