@@ -1,0 +1,59 @@
+# ── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# ── Virtual Environment ──────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Corpus data (too large for git) ──────────────────────
+data/
+
+# ── Model & checkpoint files ─────────────────────────────
+models/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.pkl
+*.joblib
+
+# ── Logs ─────────────────────────────────────────────────
+logs/
+*.log
+
+# ── Jupyter ──────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Secrets & local env ──────────────────────────────────
+.env
+.env.*
+secrets.yaml
+*.token
+*.sh
+
+# ── HuggingFace cache ────────────────────────────────────
+.cache/
+datasets_cache/
+
+# ── OS & editor ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo

@@ -1,0 +1,49 @@
+dedup:
+  exact: true
+  minhash: true
+  minhash_threshold: 0.7
+  ngram: 5
+  num_perm: 128
+download_buffer: 1.25
+languages:
+  ben_Beng:
+    bcp47: bn
+    fraction: 0.09
+  eng_Latn:
+    bcp47: en
+    fraction: 0.09
+  guj_Gujr:
+    bcp47: gu
+    fraction: 0.09
+  hin_Deva:
+    bcp47: hi
+    fraction: 0.1
+  kan_Knda:
+    bcp47: kn
+    fraction: 0.09
+  mal_Mlym:
+    bcp47: ml
+    fraction: 0.09
+  mar_Deva:
+    bcp47: mr
+    fraction: 0.09
+  pan_Guru:
+    bcp47: pa
+    fraction: 0.09
+  tam_Taml:
+    bcp47: ta
+    fraction: 0.09
+  tel_Telu:
+    bcp47: te
+    fraction: 0.09
+  urd_Arab:
+    bcp47: ur
+    fraction: 0.09
+min_wds_score: 0.5
+quality:
+  max_chars: 100000
+  max_non_alpha_ratio: 0.5
+  min_avg_word_len: 2.0
+  min_chars: 50
+source: https://data.hplt-project.org/three/sorted
+total_lines: 10000000

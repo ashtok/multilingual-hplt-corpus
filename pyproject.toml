@@ -1,0 +1,15 @@
+[project]
+name = "indic-multilingual-corpus"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "datasets>=4.8.5",
+    "datasketch>=1.10.0",
+    "huggingface-hub>=1.14.0",
+    "pyyaml>=6.0.3",
+    "requests>=2.33.1",
+    "tqdm>=4.67.3",
+    "zstandard>=0.25.0",
+]
