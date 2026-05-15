@@ -14,7 +14,7 @@ A pipeline to build a cleaned, deduplicated multilingual pretraining corpus from
 ## Quick Start
 
 ```bash
-git clone https://github.com/AM0908/multilingual-hplt-corpus.git
+git clone https://github.com/ashtok/multilingual-hplt-corpus.git
 cd multilingual-hplt-corpus
 uv sync
 ```
