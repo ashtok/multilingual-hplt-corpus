@@ -5,12 +5,16 @@ A pipeline to build a cleaned, deduplicated multilingual pretraining corpus from
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 
----
+## Datasets Created Using This Pipeline
+
+| Dataset | Languages | HuggingFace |
+|---------|-----------|-------------|
+| Indic HPLT v1 | Indic languages | [AM0908/indic-hplt-v1](https://huggingface.co/datasets/AM0908/indic-hplt-v1) |
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/AM0908/multilingual-hplt-corpus.git
+git clone https://github.com/ashtok/multilingual-hplt-corpus.git
 cd multilingual-hplt-corpus
 uv sync
 ```
